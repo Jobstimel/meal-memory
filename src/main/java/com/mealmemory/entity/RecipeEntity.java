@@ -27,8 +27,4 @@ public class RecipeEntity {
     private String lastTimeCooked;
     private int duration;
 
-    public boolean equals(RecipeEntity otherRecipe) {
-        return this.recipeName.equals(otherRecipe.getRecipeName());
-    }
-
 }

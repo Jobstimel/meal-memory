@@ -32,26 +32,26 @@ public class MealMemoryApiV1 {
     }
 
     @PostMapping(value = "/api/v1/recipe/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<RecipeEntity> addNewRecipe(@RequestBody RecipeDTO recipeDTO) throws APIPreconditionFailedException {
+    public ResponseEntity<RecipeEntity> addNewRecipe(@RequestBody RecipeDTO recipeDTO) throws APIPreconditionFailedException {
         recipeValidator.validateRecipe(recipeDTO);
         RecipeEntity recipeEntity = mySQLHandler.addRecipeToDatabase(recipeDTO);
         return new ResponseEntity<>(recipeEntity, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/api/v1/recipe/delete/{id}")
-    private ResponseEntity<String> deleteRecipe(@PathVariable long id) throws APIPreconditionFailedException {
+    public ResponseEntity<String> deleteRecipe(@PathVariable long id) throws APIPreconditionFailedException {
         mySQLHandler.deleteRecipeById(id);
         return new ResponseEntity<>("Deleted recipe with id '" + id + "'", HttpStatus.OK);
     }
 
     @GetMapping(value = "api/v1/recipes/count/all")
-    private ResponseEntity<Integer> countRecipes() {
+    public ResponseEntity<Integer> countRecipes() {
         int numberOfSavedRecipes = mySQLHandler.countAllRecipes();
         return new ResponseEntity<>(numberOfSavedRecipes, HttpStatus.OK);
     }
 
     @GetMapping(value = "api/v1/recipes/find/all")
-    private ResponseEntity<List<RecipeEntity>> findAllRecipes() {
+    public ResponseEntity<List<RecipeEntity>> findAllRecipes() {
         List<RecipeEntity> recipeEntityList = mySQLHandler.findAllRecipes();
         return new ResponseEntity<>(recipeEntityList, HttpStatus.OK);
     }

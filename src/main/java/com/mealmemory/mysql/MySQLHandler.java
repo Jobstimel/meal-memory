@@ -33,7 +33,7 @@ public class MySQLHandler {
         recipeEntity.setLastTimeCooked(recipeDTO.lastTimeCooked());
         recipeEntity.setDuration(recipeDTO.duration());
         for (RecipeEntity savedRecipe : findAllRecipes()) {
-            if (recipeEntity.equals(savedRecipe)) {
+            if (recipeEntity.getRecipeName().equals(savedRecipe.getRecipeName())) {
                 logAndThrow(String.format("Recipe with name '%s' already in database", recipeEntity.getRecipeName()));
             }
         }
